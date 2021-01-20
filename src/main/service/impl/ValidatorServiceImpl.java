@@ -11,7 +11,7 @@ public class ValidatorServiceImpl implements ValidatorService {
      * @return true if money is equal or grater than 0, else false
      */
     @Override
-    public boolean depositAmount(int money) {
-        return (money >= 0);
+    public boolean isNegative(int money) {
+        return (money <= 0);
     }
 }

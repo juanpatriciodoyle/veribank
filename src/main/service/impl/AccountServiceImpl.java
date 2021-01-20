@@ -28,12 +28,27 @@ public class AccountServiceImpl implements AccountService {
      * @param id    -> Identifier of the client account
      * @param money -> The amount of money to deposit
      * @return -> Updated Account
-     * Account not found -> new Account() set in null
+     * Account not found -> Optional.empty()
      */
     @Override
     public Optional<Account> deposit(String id, int money) {
         if (getAccount(id).isEmpty()) return Optional.empty();
         bankAccounts.put(id, bankAccounts.get(id) + money);
+        return getAccount(id);
+    }
+
+    /**
+     * Withdraw money into an existing account
+     *
+     * @param id    -> Identifier of the client account
+     * @param money -> The amount of money to withdrawal
+     * @return -> Updated Account
+     * Account not found -> Optional.empty()
+     */
+    @Override
+    public Optional<Account> withdrawal(String id, int money) {
+        if (getAccount(id).isEmpty()) return Optional.empty();
+        bankAccounts.put(id, bankAccounts.get(id) - money);
         return getAccount(id);
     }
 
