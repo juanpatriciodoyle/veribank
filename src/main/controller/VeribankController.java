@@ -25,12 +25,14 @@ public class VeribankController {
      * @return -> Updated Account or error
      */
     public AccountResponse deposit(String id, int money) {
-        if (validatorService.isNegative(money)){
+        if (validatorService.isNegative(money))
             return new AccountResponse("Deposit amount cannot be negative");
-        }
 
-        Optional<Account> account =  accountService.deposit(id, money);
-        return account.map(AccountResponse::new).orElseGet(() -> new AccountResponse(id + " not found"));
+        Optional<Account> account = accountService.getAccount(id);
+        if (account.isEmpty())
+            return new AccountResponse(id + " not found");
+
+        return new AccountResponse(accountService.deposit(id, money));
     }
 
     /**
@@ -41,11 +43,18 @@ public class VeribankController {
      * @return -> Updated Account or error message
      */
     public AccountResponse withdrawal(String id, int money) {
-        if (validatorService.isNegative(money)){
+        if (validatorService.isNegative(money))
             return new AccountResponse("Withdraw amount cannot be negative");
-        }
 
-        Optional<Account> account =  accountService.withdrawal(id, money);
-        return account.map(AccountResponse::new).orElseGet(() -> new AccountResponse(id + " not found"));
+        Optional<Account> account = accountService.getAccount(id);
+        if (account.isEmpty())
+            return new AccountResponse(id + " not found");
+
+        if (validatorService.isTooMuchWithdrawal(account.get(), money))
+            return new AccountResponse("Withdraw bigger than the current account balance");
+
+
+        return new AccountResponse(accountService.withdrawal(id, money));
     }
+
 }

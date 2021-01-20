@@ -31,10 +31,9 @@ public class AccountServiceImpl implements AccountService {
      * Account not found -> Optional.empty()
      */
     @Override
-    public Optional<Account> deposit(String id, int money) {
-        if (getAccount(id).isEmpty()) return Optional.empty();
+    public Account deposit(String id, int money) {
         bankAccounts.put(id, bankAccounts.get(id) + money);
-        return getAccount(id);
+        return getAccount(id).orElse(new Account());
     }
 
     /**
@@ -46,10 +45,9 @@ public class AccountServiceImpl implements AccountService {
      * Account not found -> Optional.empty()
      */
     @Override
-    public Optional<Account> withdrawal(String id, int money) {
-        if (getAccount(id).isEmpty()) return Optional.empty();
+    public Account withdrawal(String id, int money) {
         bankAccounts.put(id, bankAccounts.get(id) - money);
-        return getAccount(id);
+        return getAccount(id).orElse(new Account());
     }
 
     /**
@@ -59,7 +57,8 @@ public class AccountServiceImpl implements AccountService {
      * @return Account found -> The account demanded
      * Account not found -> Empty
      */
-    private Optional<Account> getAccount(String id) {
+    @Override
+    public Optional<Account> getAccount(String id) {
         Integer balance = bankAccounts.get(id);
         if (balance == null) return Optional.empty();
         return Optional.of(new Account(id, balance));

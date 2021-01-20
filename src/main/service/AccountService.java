@@ -6,6 +6,9 @@ import java.util.Optional;
 
 public interface AccountService {
 
-    Optional<Account> deposit(String id, int money);
-    Optional<Account> withdrawal(String id, int money);
+    Account deposit(String id, int money);
+
+    Account withdrawal(String id, int money);
+
+    Optional<Account> getAccount(String id);
 }

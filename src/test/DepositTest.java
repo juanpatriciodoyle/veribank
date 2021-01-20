@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class VeribankTest {
+class DepositTest {
 
     private static VeribankController veribankController;
 
@@ -37,7 +37,6 @@ class VeribankTest {
     @Order(2)
     void deposit_NotFound() {
         AccountResponse accountResponse = veribankController.deposit("eugenia", 10);
-        Account eugenia = accountResponse.getAccount();
 
         Assertions.assertAll("(client not found) deposit feature",
                 () -> assertNull(accountResponse.getAccount()),
@@ -57,27 +56,4 @@ class VeribankTest {
         );
     }
 
-    @Test
-    @Order(4)
-    void withdrawal_Ok() {
-        AccountResponse accountResponse = veribankController.withdrawal("francisco", 10);
-        Account francisco = accountResponse.getAccount();
-
-        Assertions.assertAll("withdrawal feature",
-                () -> assertEquals("francisco", francisco.getId()),
-                () -> assertEquals(100, francisco.getBalance())
-        );
-
-    }
-
-    @Test
-    @Order(5)
-    void withdrawal_NegativeAmount() {
-        AccountResponse accountResponse = veribankController.withdrawal("francisco", -10);
-
-        Assertions.assertAll("(negative amount) deposit feature",
-                () -> assertNull(accountResponse.getAccount()),
-                () -> assertEquals("Withdraw amount cannot be negative", accountResponse.getErrorMessage())
-        );
-    }
 }
