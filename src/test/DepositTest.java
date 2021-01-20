@@ -30,7 +30,6 @@ class DepositTest {
                 () -> assertEquals("francisco", francisco.getId()),
                 () -> assertEquals(110, francisco.getBalance())
         );
-
     }
 
     @Test
@@ -42,7 +41,6 @@ class DepositTest {
                 () -> assertNull(accountResponse.getAccount()),
                 () -> assertEquals("eugenia not found", accountResponse.getErrorMessage())
         );
-
     }
 
     @Test

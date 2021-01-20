@@ -1,6 +1,5 @@
 package main.service.impl;
 
-
 import main.model.Account;
 import main.service.ValidatorService;
 
@@ -25,4 +24,5 @@ public class ValidatorServiceImpl implements ValidatorService {
     public boolean isTooMuchWithdrawal(Account account, int money) {
         return account.getBalance() <= money;
     }
+
 }

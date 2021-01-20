@@ -4,7 +4,9 @@ package main.service.impl;
 import main.model.Account;
 import main.service.AccountService;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 public class AccountServiceImpl implements AccountService {
@@ -20,6 +22,7 @@ public class AccountServiceImpl implements AccountService {
     public AccountServiceImpl() {
         this.bankAccounts = new HashMap<>();
         this.bankAccounts.put("francisco", 100);
+        this.bankAccounts.put("florencia", 50);
     }
 
     /**
@@ -62,5 +65,23 @@ public class AccountServiceImpl implements AccountService {
         Integer balance = bankAccounts.get(id);
         if (balance == null) return Optional.empty();
         return Optional.of(new Account(id, balance));
+    }
+
+    /**
+     * Takes the desired amount from the origin account and add it to the destination account
+     *
+     * @param originId      -> Identifier of the origin client account
+     * @param money         -> The amount of money to transfer
+     * @param destinationId -> Identifier of the destination client account
+     * @return -> Updated accounts or a list with empty accounts
+     */
+    @Override
+    public List<Account> transfer(String originId, int money, String destinationId) {
+        bankAccounts.put(originId, bankAccounts.get(originId) - money);
+        bankAccounts.put(destinationId, bankAccounts.get(destinationId) + money);
+
+        Account origin = getAccount(originId).orElse(new Account());
+        Account destination = getAccount(destinationId).orElse(new Account());
+        return Arrays.asList(origin,destination);
     }
 }

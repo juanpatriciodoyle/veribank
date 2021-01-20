@@ -30,7 +30,6 @@ class WithdrawTest {
                 () -> assertEquals("francisco", francisco.getId()),
                 () -> assertEquals(90, francisco.getBalance())
         );
-
     }
 
     @Test
@@ -42,7 +41,6 @@ class WithdrawTest {
                 () -> assertNull(accountResponse.getAccount()),
                 () -> assertEquals("eugenia not found", accountResponse.getErrorMessage())
         );
-
     }
 
     @Test
@@ -66,4 +64,5 @@ class WithdrawTest {
                 () -> assertEquals("Withdraw bigger than the current account balance", accountResponse.getErrorMessage())
         );
     }
+
 }

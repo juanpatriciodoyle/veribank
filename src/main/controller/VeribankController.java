@@ -5,9 +5,11 @@ import main.service.AccountService;
 import main.service.ValidatorService;
 import main.to.AccountResponse;
 
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
-public class VeribankController {
+public class VeribankController implements VeribankControllerApi {
 
     private final AccountService accountService;
     private final ValidatorService validatorService;
@@ -26,7 +28,7 @@ public class VeribankController {
      */
     public AccountResponse deposit(String id, int money) {
         if (validatorService.isNegative(money))
-            return new AccountResponse("Deposit amount cannot be negative");
+            return new AccountResponse("Deposit amount cannot be zero or less");
 
         Optional<Account> account = accountService.getAccount(id);
         if (account.isEmpty())
@@ -42,9 +44,10 @@ public class VeribankController {
      * @param money -> The amount of money to withdrawal
      * @return -> Updated Account or error message
      */
+    @Override
     public AccountResponse withdrawal(String id, int money) {
         if (validatorService.isNegative(money))
-            return new AccountResponse("Withdraw amount cannot be negative");
+            return new AccountResponse("Withdraw amount cannot be zero or less");
 
         Optional<Account> account = accountService.getAccount(id);
         if (account.isEmpty())
@@ -55,6 +58,35 @@ public class VeribankController {
 
 
         return new AccountResponse(accountService.withdrawal(id, money));
+    }
+
+    /**
+     * Transfer money from an account to other existing account
+     *
+     * @param originId      -> Identifier of the origin client account
+     * @param money         -> The amount of money to transfer
+     * @param destinationId -> Identifier of the destination client account
+     * @return -> Updated Accounts or error message
+     */
+    @Override
+    public List<AccountResponse> transfer(String originId, int money, String destinationId) {
+        if (validatorService.isNegative(money))
+            return Collections.singletonList(new AccountResponse("Transfer amount cannot be zero or less"));
+
+        Optional<Account> originAccount = accountService.getAccount(originId);
+        Optional<Account> destinationAccount = accountService.getAccount(destinationId);
+        if (originAccount.isEmpty())
+            return Collections.singletonList(new AccountResponse(originId + " not found"));
+        if (destinationAccount.isEmpty())
+            return Collections.singletonList(new AccountResponse(destinationId + " not found"));
+
+        if (validatorService.isTooMuchWithdrawal(originAccount.get(), money))
+            return Collections.singletonList(new AccountResponse("Transfer bigger than the current account balance"));
+
+        List<AccountResponse> accountResponseList = new ArrayList<>();
+        accountService.transfer(originId, money, destinationId).forEach(account -> accountResponseList.add(new AccountResponse(account)));
+
+        return accountResponseList;
     }
 
 }
