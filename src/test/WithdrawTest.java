@@ -50,7 +50,7 @@ class WithdrawTest {
 
         Assertions.assertAll("(negative amount) Withdrawal feature",
                 () -> assertNull(accountResponse.getAccount()),
-                () -> assertEquals("Withdraw amount cannot be negative", accountResponse.getErrorMessage())
+                () -> assertEquals("Withdraw amount cannot be zero or less", accountResponse.getErrorMessage())
         );
     }
 

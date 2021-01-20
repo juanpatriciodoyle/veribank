@@ -22,7 +22,7 @@ public class ValidatorServiceImpl implements ValidatorService {
      */
     @Override
     public boolean isTooMuchWithdrawal(Account account, int money) {
-        return account.getBalance() <= money;
+        return account.getBalance() < money;
     }
 
 }

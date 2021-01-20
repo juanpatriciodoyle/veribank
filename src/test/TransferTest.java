@@ -66,7 +66,7 @@ class TransferTest {
 
         Assertions.assertAll("(negative amount) Transfer feature",
                 () -> assertNull(accountResponseList.get(0).getAccount()),
-                () -> assertEquals("Transfer amount cannot be negative", accountResponseList.get(0).getErrorMessage())
+                () -> assertEquals("Transfer amount cannot be zero or less", accountResponseList.get(0).getErrorMessage())
         );
     }
 

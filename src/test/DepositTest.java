@@ -50,7 +50,7 @@ class DepositTest {
 
         Assertions.assertAll("(negative amount) deposit feature",
                 () -> assertNull(accountResponse.getAccount()),
-                () -> assertEquals("Deposit amount cannot be negative", accountResponse.getErrorMessage())
+                () -> assertEquals("Deposit amount cannot be zero or less", accountResponse.getErrorMessage())
         );
     }
 
