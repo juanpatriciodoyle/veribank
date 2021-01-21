@@ -2,23 +2,30 @@
 ![Days](https://img.shields.io/static/v1?label=Working-Days&message=1&color=blue)
 ![Status](https://img.shields.io/static/v1?label=Done&message=100%&color=green)
 
+*See [Challenge](src/main/resources/Challenge.md) for the details of the tasks.*
 
-##HashMap used as a db:
 
-###·Francisco
-######id: francisco
-######balance: 100
+Backend of bank simple project
 
-###·Florencia
-######id: florencia
-######balance: 50
+***HashMap used as a db:***
 
-##Available services:
+**·Francisco**
+
+id -> francisco
+
+balance -> 100
+
+**·Florencia**
+
+id -> florencia
+
+balance -> 50
+
+*Available services*
 1. Deposit
 2. Withdraw
 3. Transfer
    
-*See [Challenge](src/main/resources/Challenge.md) for the details of the tasks.*
 ### Examples
 ##### Deposit feature
 ```java
