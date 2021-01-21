@@ -5,9 +5,9 @@
 *See [Challenge](src/main/resources/Challenge.md) for the details of the tasks.*
 
 
-Backend of bank simple project
+Backend of bank simple project.
 
-#HashMap used as a db:
+HashMap used as a db:
 
 ####·Francisco
 
