@@ -7,24 +7,7 @@
 
 Backend of bank simple project.
 
-HashMap used as a db:
 
-####·Francisco
-
-id: francisco
-
-balance: 100
-
-####·Florencia
-
-id: florencia
-
-balance: 50
-
-###Available services:
-1. Deposit
-2. Withdraw
-3. Transfer
    
 ### Examples
 ##### Deposit feature
@@ -59,6 +42,25 @@ class veribankTest {
     }
 }
 ```
+
+##HashMap used as a db:
+
+####·Francisco
+
+id: francisco
+
+balance: 100
+
+####·Florencia
+
+id: florencia
+
+balance: 50
+
+###Available services:
+1. Deposit
+2. Withdraw
+3. Transfer
 
 *See the tests for the example implementation, else, use the frontend: veribank-front*
 
