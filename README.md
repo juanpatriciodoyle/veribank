@@ -7,19 +7,21 @@
 
 Backend of bank simple project
 
-###HashMap used as a db
+***HashMap used as a db:***
 
-####·Francisco
+**·Francisco**
 
-######id -> francisco
-######balance -> 100
+id -> francisco
 
-####·Florencia
+balance -> 100
 
-######id -> florencia
-######balance -> 50
+**·Florencia**
 
-###Available services
+id -> florencia
+
+balance -> 50
+
+*Available services*
 1. Deposit
 2. Withdraw
 3. Transfer
