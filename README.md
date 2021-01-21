@@ -5,20 +5,21 @@
 *See [Challenge](src/main/resources/Challenge.md) for the details of the tasks.*
 
 
-
 Backend of bank simple project
 
 ###HashMap used as a db:
 
 ####·Francisco
 
-######id: francisco
-######balance: 100
+id: francisco
+
+balance: 100
 
 ####·Florencia
 
-######id: florencia
-######balance: 50
+id: florencia
+
+balance: 50
 
 ###Available services:
 1. Deposit
